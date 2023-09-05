@@ -1,3 +1,4 @@
+# bugs: after reaching 5 points, need to press 1 twice to earn another point; after 5 points need to press 2 twice to quit; game reverts back to first player_choice prompt after using the rusty scissors; all player_choice input buttons available on each turn
 game_data = {
   "money": 0,
   "quit": False
@@ -19,7 +20,7 @@ while(True):
     print("You quit the game")
     break
 
-  elif (game_data["money"] >= 5):
+  if (game_data["money"] >= 5):
     player_choice = int(input("""
                         You can...
                         [1] Make 1 money cutting lawns with your teeth?
