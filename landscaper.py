@@ -1,24 +1,43 @@
+# Pseudocode: What I want the game to do:
+## Option to make $1  with user input [1] 
+## Option to quit at any time with user input [2] or [q]
+## New message with user input response at $5, $25, $250, $500; user input allows you to buy upgrade tool
+## Include tool(s) as items in a list within game data upon purchase
+## If upgraded tool purchases, new message with user input option to make $__ using (new) tool to cut lawns
+## Print message 'You Win!' and break game loop if tool = team of starving students AND $ >= $1,000
+
+# Questions / challenges:
+## I only want the prompt to cut the grass with teeth for $1 to display until the user upgrades tools. The way I have it programmed seems to default back to that point in the script under circumstances, and I haven't written any logic to prevent that.
+
 # bugs: after reaching 5 points, need to press 1 twice to earn another point; after 5 points need to press 2 twice to quit; game reverts back to first player_choice prompt after using the rusty scissors; all player_choice input buttons available on each turn
 game_data = {
   "money": 0,
   "quit": False
 }
-while(True):
-  player_choice = int(input("""
-                      Would you like to...
-                      [1] Make 1 money cutting lawns with your teeth?
-                      [2] Quit Landscaper
-                      """))
-  if (player_choice == 1):
-    game_data["money"] += 1
-    print(f"You now have a total of {game_data['money']} money")
 
-  if (player_choice == 2):
-    game_data["quit"] = True
+while(True):
+# Win conditions
+  if (game_data["money"] >= 10):
+    print("You won the game!")
+    break
 
   if (game_data["quit"]) == True:
     print("You quit the game")
     break
+
+# User inputs
+  if (game_data["money"] < 5):
+    player_choice = int(input("""
+                        Would you like to...
+                        [1] Make 1 money cutting lawns with your teeth?
+                        [2] Quit Landscaper
+                        """))
+    if (player_choice == 1):
+      game_data["money"] += 1
+      print(f"You now have a total of {game_data['money']} money")
+
+    if (player_choice == 2):
+      game_data["quit"] = True
 
   if (game_data["money"] >= 5):
     player_choice = int(input("""
@@ -27,6 +46,13 @@ while(True):
                         [2] Quit Landscaper?
                         [3] Buy rusty scissors for 5 money?
                         """))
+    if (player_choice == 1):
+      game_data["money"] += 1
+      print(f"You now have a total of {game_data['money']} money")
+
+    if (player_choice == 2):
+      game_data["quit"] = True
+
 
   if (player_choice == 3):
     game_data["money"] -= 5
@@ -46,6 +72,3 @@ while(True):
                           [2] Quit Landscaper?
                           """))
 
-  if (game_data["money"] >= 10):
-    print("You won the game!")
-    break
