@@ -12,12 +12,13 @@
 # bugs: after reaching 5 points, need to press 1 twice to earn another point; after 5 points need to press 2 twice to quit; game reverts back to first player_choice prompt after using the rusty scissors; all player_choice input buttons available on each turn
 game_data = {
   "money": 0,
-  "quit": False
+  "quit": False,
+  "tool": ""
 }
 
 while(True):
 # Win conditions
-  if (game_data["money"] >= 10):
+  if (game_data["money"] >= 100):
     print("You won the game!")
     break
 
@@ -26,7 +27,7 @@ while(True):
     break
 
 # User inputs
-  if (game_data["money"] < 5):
+  if (game_data["money"] < 5 and game_data["tool"] == ""):
     player_choice = int(input("""
                         Would you like to...
                         [1] Make 1 money cutting lawns with your teeth?
@@ -39,7 +40,7 @@ while(True):
     if (player_choice == 2):
       game_data["quit"] = True
 
-  if (game_data["money"] >= 5):
+  if (game_data["money"] >= 5 and game_data['tool'] == ""):
     player_choice = int(input("""
                         You can...
                         [1] Make 1 money cutting lawns with your teeth?
@@ -53,22 +54,49 @@ while(True):
     if (player_choice == 2):
       game_data["quit"] = True
 
+    if (player_choice == 3):
+      game_data["money"] -= 5
+      game_data["tool"] = "rusty scissors"
+      print(f"You bought and equipped {game_data['tool']} you currently have {game_data['money']}")
 
-  if (player_choice == 3):
-    game_data["money"] -= 5
-    print("You bought the rusty scissors")
+  if (game_data["tool"] == "rusty scissors"):
     player_choice = int(input("""
                           You can...
-                          [4] Make 5 money cutting the lawn with your rusty scissors?
+                          [1] Make 5 money cutting the lawn with your rusty scissors?
                           [2] Quit Landscaper?
+                          [3] Do you want to spend 
                           """))
+    if (player_choice == 1):
+      game_data["money"] += 5
+      print(f"You now have a total of {game_data['money']} money")
+
+    elif (player_choice == 2):
+      game_data["quit"] = True
+
+    elif (player_choice == 3 and game_data["money"] > 25):
+      game_data["money"] -= 25
+      game_data["tool"] = "pushmower"
+      print(f"You bought and equipped {game_data['tool']}")
+    else:
+      print("Not enough money")
+
+
+
+
+
+
+
+
+  #if (player_choice == 3):
+  #  game_data["money"] -= 5
+  #  print("You bought the rusty scissors")
     
-  if (player_choice == 4):
-    game_data["money"] += 5
-    print(f"You now have a total of {game_data['money']} money")
-    player_choice = int(input("""
-                          You can...
-                          [4] Make 5 money cutting the lawn with your rusty scissors?
-                          [2] Quit Landscaper?
-                          """))
+  #if (player_choice == 4):
+  #  game_data["money"] += 5
+  #  print(f"You now have a total of {game_data['money']} money")
+  #  player_choice = int(input("""
+  #                        You can...
+  #                        [4] Make 5 money cutting the lawn with your rusty scissors?
+  #                        [2] Quit Landscaper?
+  #                        """))
 
