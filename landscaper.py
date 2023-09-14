@@ -18,7 +18,7 @@ game_data = {
 
 while(True):
 # Win conditions
-  if (game_data["money"] >= 1000):
+  if (game_data["money"] >= 1000 and game_data["tool"] == "starving students"):
     print("You won the game!")
     break
 
@@ -122,6 +122,19 @@ while(True):
     else:
       print("Not enough money")
 
+  if (game_data["tool"] == "starving students"):
+    player_choice = int(input("""
+                          You can...
+                          [1] Make 250 money cutting the lawn with your team of starving students?
+                          [2] Quit Landscaper?
+                          """))
+
+    if (player_choice) == 1:
+      game_data["money"] += 250
+      print(f"You now have a total of {game_data['money']} money")
+
+    elif (player_choice == 2):
+      game_data["quit"] = True
 
 
 
