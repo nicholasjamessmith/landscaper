@@ -57,14 +57,14 @@ while(True):
     if (player_choice == 3):
       game_data["money"] -= 5
       game_data["tool"] = "rusty scissors"
-      print(f"You bought and equipped {game_data['tool']} you currently have {game_data['money']}")
+      print(f"You bought and equipped {game_data['tool']} you currently have {game_data['money']} money")
 
   if (game_data["tool"] == "rusty scissors"):
     player_choice = int(input("""
                           You can...
                           [1] Make 5 money cutting the lawn with your rusty scissors?
                           [2] Quit Landscaper?
-                          [3] Do you want to spend 
+                          [3] Do you want to spend 25 money to buy an old timey push lawnmower?
                           """))
     if (player_choice == 1):
       game_data["money"] += 5
@@ -73,10 +73,31 @@ while(True):
     elif (player_choice == 2):
       game_data["quit"] = True
 
-    elif (player_choice == 3 and game_data["money"] > 25):
+    elif (player_choice == 3 and game_data["money"] >= 25):
       game_data["money"] -= 25
       game_data["tool"] = "pushmower"
-      print(f"You bought and equipped {game_data['tool']}")
+      print(f"You bought and equipped {game_data['tool']} you currently have {game_data['money']} money")
+    else:
+      print("Not enough money")
+
+  if (game_data["tool"] == "pushmower"):
+    player_choice = int(input("""
+                          You can...
+                          [1] Make 50 money cutting the lawn with your pushmower?
+                          [2] Quit Landscaper?
+                          [3] Buy a fancy battery-powered lawnmower for 250 money?
+                          """))
+    if (player_choice == 1):
+      game_data["money"] += 50
+      print(f"You now have a total of {game_data['money']} money")
+    
+    elif (player_choice == 2):
+      game_data["quit"] = True
+
+    elif (player_choice == 3 and game_data["money"] >= 250):
+      game_data["money"] -= 250
+      game_data["tool"] = "battery-powered lawnmower"
+      print(f"You bought and equipped {game_data['tool']} you currently have {game_data['money']} money")
     else:
       print("Not enough money")
 
