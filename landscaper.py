@@ -18,7 +18,7 @@ game_data = {
 
 while(True):
 # Win conditions
-  if (game_data["money"] >= 100):
+  if (game_data["money"] >= 1000):
     print("You won the game!")
     break
 
@@ -97,6 +97,27 @@ while(True):
     elif (player_choice == 3 and game_data["money"] >= 250):
       game_data["money"] -= 250
       game_data["tool"] = "battery-powered lawnmower"
+      print(f"You bought and equipped {game_data['tool']} you currently have {game_data['money']} money")
+    else:
+      print("Not enough money")
+
+  if (game_data["tool"] == "battery-powered lawnmower"):
+    player_choice = int(input("""
+                          You can...
+                          [1] Make 100 money cutting the lawn with your pushmower?
+                          [2] Quit Landscaper?
+                          [3] Hire a team of starving students for 500 money?
+                          """))
+    if (player_choice == 1):
+      game_data["money"] += 100
+      print(f"You now have a total of {game_data['money']} money")
+    
+    elif (player_choice == 2):
+      game_data["quit"] = True
+
+    elif (player_choice == 3 and game_data["money"] >= 500):
+      game_data["money"] -= 500
+      game_data["tool"] = "starving students"
       print(f"You bought and equipped {game_data['tool']} you currently have {game_data['money']} money")
     else:
       print("Not enough money")
